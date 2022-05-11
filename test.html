@@ -6,22 +6,79 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    .uploadImageArea {
+    .wrapper {
       display: flex;
-      padding: 15px;
+      flex-direction: column;
+      align-items: center;
     }
-    #uploadImage {
-      width: 500px;
-      cursor: pointer;
-      border-radius: 10px;
+    .counterArea {
+      background-color: #8a9;
+      padding: 55px;
+      font-size: 2rem;
+      border-radius: 5px;
+    }
+    .btn, .counterArea, .imageArea {
+      width: 60%;
+      text-align: center;
+      margin: 5px;
+      padding: 15px;
+      box-sizing: border-box;
+    }
+    #dog {
+      width: 100%;
+      margin-top: 50px;
+      border-radius: 5px;
+    }
+    .inputArea {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 5px;
+    }
+    #submit {
+      margin: 5px;
+      padding: 15px;
     }
   </style>
 </head>
 <body>
 
-  <input type="file" onchange="readFile(this)">
-  <div class="uploadImageArea"></div>
+<h1>解答</h1>
 
-  <script src="test.js"></script>
+<div class="wrapper">
+<div class="inputArea">
+  <label for="email">Email</label>
+  <input type="text" name="email" id="email">
+  <label for="pass">Password</label>
+  <input type="text" name="pass" id="pass">
+  <button type="submit" id="submit">submit</button>
+</div>
+
+<div class="displayArea">
+  <div class="emailArea"></div>
+  <div class="passArea"></div>
+</div>
+
+  <button id="counter" class="btn">
+    Count!
+  </button>
+
+  
+  <div class="counterArea"></div>
+  
+  <button id="reset" class="btn">
+    Reset
+  </button>
+  
+  <div class="imageArea">
+    <img id="dog" src="" alt="inu">
+  </div>
+  
+  <button id="reload" class="btn">
+    Reload Image
+  </button>
+
+</div>
+
+<script src="test.js"></script>
 </body>
-</html>

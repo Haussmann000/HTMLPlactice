@@ -154,7 +154,7 @@ submit.addEventListener('click', () => {
 
 
 
-### 演習：Javascriptでフォームの内容を表示
+### 演習3：Javascriptでフォームの内容を表示
 - フォームを入力して「submit」ボタンを押すとフォームの内容が下部に表示されるように変更してください。
 - ※見た目は完全に一致しなくても大丈夫です。
 ![](https://i.imgur.com/wYhkhqT.gif)
@@ -221,7 +221,7 @@ Fetch APIはその一つです。（後半で学習します）
 - 上記ができたら：上記のカウントをリセットするボタンを付けてみてください
 
 
-## 応用編
+## 応用編（外部API）
 
 - 目的
   - 外部APIから画像を取得する手法を確認します。
@@ -230,27 +230,26 @@ Fetch APIはその一つです。（後半で学習します）
 #### 概要
 
 - APIとは
-    - （主に）JSONを返却するアプリケーション（のURL）
-    - 大半はJSONを使います。
+    - JSONを返却するアプリケーション（のURL）
+    - APIはjsonファイル以外も返却できますが、大半はJSONを使います。（多分）
 
 - JSONとは
     - [JSONってなに?これさえ読めば理解が深まる](https://reffect.co.jp/html/what_is_json#:~:text=JSON%E3%81%AFJavaScript%20Object%20Notation,%E3%81%AF%E5%88%A9%E7%94%A8%E3%81%95%E3%82%8C%E3%81%A6%E3%81%84%E3%81%BE%E3%81%99%E3%80%82)
-    - 構造化された（階層のある）データです。
+    - 構造化された（階層のある）データ形式です。
+    - JavaScriptのオブジェクト記法をもとにしていますが、扱いやすいため、他の言語でも広くデータのやり取りのインターフェースとして使われています。
 
 
 ### JSON操作の練習
 
-1. 下記のコードをtest.jsに貼り付けてください。
+1. 下記のコードを開発者ツールのコンソールに直接貼り付けてください。
 
 ```
 const json = {
   message: "myURL"
 }
-
-console.log(json.message)
 ```
 
-2. ブラウザの開発者ツールでコンソールを確認してください。
+2. ブラウザのコンソール上で`json`と入力して、表示される結果を確認してください
 
 
 ### JSONの操作について
@@ -259,7 +258,7 @@ console.log(json.message)
 - 1. の記述を以下のように書き換えてください。
 ```
 const json = {
-  song: {
+  favoriteSong: {
      title: "Sugar",
      artist: "Maroon5"
   }
@@ -274,9 +273,12 @@ console.log(json)
 階層構造になっていることに注意してプロパティを記述してください。
 
 
-※演習を終えたら、上記の記述は削除しておいてください。
+#### 演習2
+上記を参考に、自分の好きなものについての情報をJSONで表現してみてください。
 
-### 練習
+
+
+### 演習（画像読み込み）
 
 1. 下記のコードをtest.jsの一番下に貼り付けてください
 
@@ -329,6 +331,9 @@ window.addEventListener('DOMContentLoaded', e => {
         - 現在のコードでどのように表示しているかを確認する
             - 以下のコードを適切な行に追加し、コンソールでレスポンスを確認する
             - `console.log(data)`
+        - 先ほどのJSONの項目の練習を参考に、適切なデータを取り出してください
+
+
 
 
 ### 付録
@@ -337,10 +342,10 @@ window.addEventListener('DOMContentLoaded', e => {
     - 記述は最小限になるようにしてください（fetchDogImage()の中身をコピペは×）
 
 
-- それも終わったら：上記のコードにエラーハンドリングを追加してみましょう
+- それも終わったら：上記のコードにエラーログを追加してみましょう
 
 
-- エラーハンドリング実装の方針
+- エラーログ実装の方針
 
 test.jsを以下のように書き換えてください。
 
@@ -373,10 +378,10 @@ const fetchDogImage = () => {
 
 
 
-## ファイルアップロード処理
+## 応用編2（ファイル操作）
 
 ### 目的
-- ローカルファイルの読み書きは実務で非常によく使います
+- ローカルファイルのアップロードやダウンロードは業務向けシステムではよく使われるため、雰囲気をつかんでおきます
 - JavaScriptで疑似的にファイルアップロード処理を再現します（実際にはDBが必要です）
 
 ### 準備
@@ -429,25 +434,20 @@ function readFile(input) {
 }
 ```
 
-FileUpload.jsの適切な位置に下記を追加して、readerインスタンスの中身をコンソールで確認してください。
-`console.log(reader)`
-
-※FileReaderクラスは、ファイル読込のためにJavascriptがデフォルトで持っているクラスです。
-`let reader = new FileReader();`
-この個所で、FileReaderクラスのインスタンスを新規作成して、変数readerに格納しています。
-この処理を行うことで、以降の記述ではreaderインスタンスに備わっているプロパティを使ってファイル読込を行うことができます。
 
 
 
 
-### 演習
+
+### 演習（アップロードした画像を表示）
 - ローカルPCに保存した任意の画像ファイルを読み込んでサムネイルを表示させてください。
 - 実装の方針
-    - imgタグのsrcの中に、`reader`オブジェクトの`result`を指定してください。
+    - imgタグのsrcの中に、`reader`オブジェクトの`result`プロパティを指定してください。（JSONの項目を参照）
+    - cssを使って表示される画像の大きさを制限してください（横500px）
+        - imgタグ内に直接指定は×
     - HTMLの中にimgタグがないため、Javascriptからimgタグを生成してください。
         - innerHTMLにタグを記述すると、描画された際にHTML要素として生成されます。
         - 例：`textArea.innerHTML = "<p>text</p>" `
-        - ※あらかじめHTML内にimgタグを作らないようにしてください。
 
 
 ### 演習2
@@ -458,161 +458,8 @@ FileUpload.jsの適切な位置に下記を追加して、readerインスタン�
         1. imgタグに`onclick`プロパティをつける
     - `window.confirm`を使って、削除するかどうかを確認するようにしてください。
 
-
-# 解答
-test.html
-
-```test.html
+### 演習3
+- 複数ファイルアップロードができるようにしてください。
 
 
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <style>
-    .wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .counterArea {
-      background-color: #8a9;
-      padding: 55px;
-      font-size: 2rem;
-      border-radius: 5px;
-    }
-    .btn, .counterArea, .imageArea {
-      width: 60%;
-      text-align: center;
-      margin: 5px;
-      padding: 15px;
-      box-sizing: border-box;
-    }
-    #dog {
-      width: 100%;
-      margin-top: 50px;
-      border-radius: 5px;
-    }
-    .inputArea {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 5px;
-    }
-    #submit {
-      margin: 5px;
-      padding: 15px;
-    }
-  </style>
-</head>
-<body>
-
-<h1>解答</h1>
-
-<div class="wrapper">
-<div class="inputArea">
-  <label for="email">Email</label>
-  <input type="text" name="email" id="email">
-  <label for="pass">Password</label>
-  <input type="text" name="pass" id="pass">
-  <button type="submit" id="submit">submit</button>
-</div>
-
-<div class="displayArea">
-  <div class="emailArea"></div>
-  <div class="passArea"></div>
-</div>
-
-  <button id="counter" class="btn">
-    Count!
-  </button>
-
-  
-  <div class="counterArea"></div>
-  
-  <button id="reset" class="btn">
-    Reset
-  </button>
-  
-  <div class="imageArea">
-    <img id="dog" src="" alt="inu">
-  </div>
-  
-  <button id="reload" class="btn">
-    Reload Image
-  </button>
-
-</div>
-
-<script src="test.js"></script>
-</body>
-```
-
-test.js
-    
-```test.js
-https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Strict_mode
-'use strict'
-
-const submitButton = document.querySelector('#submit')
-const emailArea = document.querySelector('.emailArea')
-const passArea = document.querySelector('.passArea')
-const counter = document.querySelector('#counter');
-const reset = document.querySelector('#reset');
-const counterArea = document.querySelector('.counterArea');
-const fileArea = document.querySelector('.fileArea');
-const reload = document.querySelector('#reload');
-
-let cnt = 0;
-counterArea.innerHTML = cnt;
-
-
-submitButton.addEventListener('click', () => {
-  let mail = document.querySelector('#email').value
-  let pass = document.querySelector('#pass').value
-  emailArea.innerHTML = `Email: ${mail}`;
-  passArea.innerHTML = `Password: ${pass}`;
-})
-
-
-counter.addEventListener('click', () => {
-  counterArea.innerHTML = cnt += 1;
-}
-)
-
-reset.addEventListener('click', () => {
-  counterArea.innerHTML = cnt = 0;
-}
-)
-
-const fetchDogImage = () => {
-  fetch("https://dog.ceo", {
-    mode: 'cors'
-  }).then(
-    res => {
-      res.json().then(
-        data =>{
-          console.log(data)
-          const dog = document.querySelector('#dog');
-          const dogImageUrl = data.message
-          dog.src = dogImageUrl
-        })
-  }).catch(error => {
-    console.error(error)
- })
-}
-
-reload.addEventListener('click', () => {
-  fetchDogImage()
-})
-
-
-window.addEventListener('DOMContentLoaded', e => {
-  fetchDogImage()
-})
-
-```
+### 以上

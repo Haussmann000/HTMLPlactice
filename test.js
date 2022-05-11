@@ -1,25 +1,60 @@
-function readFile(input) {
-  let file = input.files[0];
+  test.js
+https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Strict_mode
+'use strict'
 
-  let reader = new FileReader();
-  console.log(file)
-  
-  reader.onload = function() {
-    const uploadImageArea = document.querySelector('.uploadImageArea')
-    uploadImageArea.innerHTML = `<img src="${reader.result}" alt="アップロードされた画像" id="uploadImage" onclick="deleteImage()"/>`
-  };  
-  reader.onerror = function() {
-    console.log(reader.error);
-  };
-  
-  reader.readAsDataURL(file);
+const submitButton = document.querySelector('#submit')
+const emailArea = document.querySelector('.emailArea')
+const passArea = document.querySelector('.passArea')
+const counter = document.querySelector('#counter');
+const reset = document.querySelector('#reset');
+const counterArea = document.querySelector('.counterArea');
+const fileArea = document.querySelector('.fileArea');
+const reload = document.querySelector('#reload');
 
+let cnt = 0;
+counterArea.innerHTML = cnt;
+
+
+submitButton.addEventListener('click', () => {
+  let mail = document.querySelector('#email').value
+  let pass = document.querySelector('#pass').value
+  emailArea.innerHTML = `Email: ${mail}`;
+  passArea.innerHTML = `Password: ${pass}`;
+})
+
+
+counter.addEventListener('click', () => {
+  counterArea.innerHTML = cnt += 1;
+}
+)
+
+reset.addEventListener('click', () => {
+  counterArea.innerHTML = cnt = 0;
+}
+)
+
+const fetchDogImage = () => {
+  fetch("https://dog.ceo", {
+    mode: 'cors'
+  }).then(
+    res => {
+      res.json().then(
+        data =>{
+          console.log(data)
+          const dog = document.querySelector('#dog');
+          const dogImageUrl = data.message
+          dog.src = dogImageUrl
+        })
+  }).catch(error => {
+    console.error(error)
+ })
 }
 
-function deleteImage() {
-  let isDelete = window.confirm('削除しますか？')
-  if(isDelete) {
-    document.querySelector('.uploadImageArea').innerHTML = ""
-  }else {
-  }
-}
+reload.addEventListener('click', () => {
+  fetchDogImage()
+})
+
+
+window.addEventListener('DOMContentLoaded', e => {
+  fetchDogImage()
+})
