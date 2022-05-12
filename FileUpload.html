@@ -8,6 +8,7 @@
   <style>
     .uploadImageArea {
       display: flex;
+      flex-direction: column;
       padding: 15px;
     }
     #uploadImage {
@@ -19,9 +20,9 @@
 </head>
 <body>
 
-  <input type="file" onchange="readFile(this)">
+  <input type="file" onchange="readFile(this)" multiple>
   <div class="uploadImageArea"></div>
 
-  <script src="test.js"></script>
+  <script src="FileUpload.js"></script>
 </body>
 </html>
