@@ -280,7 +280,7 @@ console.log(json)
 
 ### 演習（画像読み込み）
 
-1. 下記のコードをtest.jsの一番下に貼り付けてください
+1. FetchImage.jsを新規作成し、下記のコードを貼り付けてください
 
 ```
 const fetchDogImage = () => {
@@ -303,7 +303,7 @@ window.addEventListener('DOMContentLoaded', e => {
 })
 ```
 
-2. test.htmlの適切な個所に下記のコードを貼り付けてください（bodyタグの内側であればどこでもOKです）
+2. FetchImage.htmlを新規作成し、適切な個所に下記のコードを貼り付けてください（bodyタグの内側であればどこでもOKです）
 
 ```
   <div class="imageArea">
@@ -311,7 +311,7 @@ window.addEventListener('DOMContentLoaded', e => {
   </div>
 ```
 
-3. test.html上に画像が表示されるかブラウザで確認してみてください。
+3. FetchImage.html上に画像が表示されるかブラウザで確認してみてください。
 4. ページを再読み込みして、画像がどうなるかを確認してみてください。
 
 
@@ -347,7 +347,7 @@ window.addEventListener('DOMContentLoaded', e => {
 
 - エラーログ実装の方針
 
-test.jsを以下のように書き換えてください。
+FetchImage.jsを以下のように書き換えてください。
 
 ```
 const fetchDogImage = () => {
@@ -389,6 +389,7 @@ const fetchDogImage = () => {
 FileUpload.jsとFileUpload.htmlを新規作成し、それぞれ下記のコードを貼り付けてください。
 
 FileUpload.jsに以下を追加してください
+
 ```
 function readFile(input) {
   let file = input.files[0];
@@ -405,11 +406,11 @@ FileUpload.htmlに以下を追加してください
 
 ### 練習1（ファイル情報の読込）
 
-1. fileオブジェクトの中身をコンソールに表示させて、どのような情報が入っているか確認してください。
+1. fileオブジェクトの中身をコンソールに表示させて、どのような情報が入っているか確認してください。（`console.log(file)`）
 2. fileオブジェクトの以下の情報を取り出して、HTML内に表示させてください。
     - ファイル名
     - サイズ
-    - 最終変更日時
+    - 最終更新日時
 
 
 
@@ -439,7 +440,7 @@ function readFile(input) {
 
 
 
-### 演習（アップロードした画像を表示）
+### 演習1（アップロードした画像を表示）
 - ローカルPCに保存した任意の画像ファイルを読み込んでサムネイルを表示させてください。
 - 実装の方針
     - imgタグのsrcの中に、`reader`オブジェクトの`result`プロパティを指定してください。（JSONの項目を参照）
@@ -455,11 +456,46 @@ function readFile(input) {
 - 実装の方針
     - `deleteImage`関数を作り、画像がクリックされると呼び出されるようにしてください。
     - 下記の方法で実装してください。
-        1. imgタグに`onclick`プロパティをつける
-    - `window.confirm`を使って、削除するかどうかを確認するようにしてください。
+        1. innerHTMLで描画されるimgタグに`onclick`プロパティをつける
+        2. `window.confirm`を使って、削除するかどうかを確認するようにしてください。
+        - 参考：https://developer.mozilla.org/ja/docs/Web/API/Window/confirm
 
 ### 演習3
-- 複数ファイルアップロードができるようにしてください。
+- 下記のコードを参考にして、複数ファイルアップロードができるようにしてください。
+
+
+
+```
+  const files = input.files;
+
+  Array.from(files).forEach(element => {
+    let reader = new FileReader(); 
+    reader.readAsDataURL(element);
+
+    reader.onload = function(e) {
+    // ここに処理を書く
+    }  
+    reader.onerror = function() {
+      console.log(reader.error);
+    };
+  })
+```
+
+
+
+
+- ヒント
+    - HTML側は、以下のようにしてください。
+        - `<input type="file" onchange="readFile(this)" mutilple>`
+    - `input.files`はFileListです。FileListは配列ではないため、`Array.from()`で配列に変換しています。
+    - 変換した卑劣に対して`forEach`を使って`files`の中身をすべて取り出しています。
+    - 仮引数`element`はFileListの中の一つ一つの要素を表しています。
+
+        - 参考：https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
+    - 取り出した中身を順番にHTMLとして生成して表示してみましょう。
+        - `innerHTML`ではなく`appendChild()`を使ってください
+        - 参考：https://techacademy.jp/magazine/20820
+
 
 
 ### 以上
