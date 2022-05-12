@@ -488,7 +488,7 @@ function readFile(input) {
     - HTML側は、以下のようにしてください。
         - `<input type="file" onchange="readFile(this)" mutilple>`
     - `input.files`はFileListです。FileListは配列ではないため、`Array.from()`で配列に変換しています。
-    - 変換した卑劣に対して`forEach`を使って`files`の中身をすべて取り出しています。
+    - 変換し他配列に対して`forEach`を使って`files`の中身をすべて取り出しています。
     - 仮引数`element`はFileListの中の一つ一つの要素を表しています。
 
         - 参考：https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
