@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    ul {
+      margin: 0;
+      padding: 0;
+    }
+    .inputButton {
+      width: 160px;
+      height: 50px;
+      border: 1px gray solid;
+      box-shadow: 2px 2px 2px 2px #ddd;
+      background-color: #fff;
+      border-radius: 5px;
+      cursor: pointer;
+      text-align: center;
+      display: inline-block;
+    }
+    .inputButton:hover {
+      background-color: #ddd;
+    }
+    .inputNameList {
+      list-style-type: none;
+      display: none;
+    }
+    .extended {
+      display:flex;
+      flex-direction: column;
+    }
+    #inputNameArea {
+      width: 150px;
+    }
+    .inputName {
+      cursor: pointer;
+      margin: 3px;
+      border-radius: 5px;
+      width: 150px;
+      background-color: #ffeeff;
+    }
+  .inputWrapper {
+    display: flex;
+  }
+  #cross {
+    margin: 10px;
+    cursor: pointer;
+  }
+  </style>
+</head>
+<body>
+
+<div id="wrapper">
+  <div class="inputWrapper">
+    <div class="inputButton"></div>
+    <div class="clearInput">
+      <img src="img/cross.png" alt="cross" id="cross">
+    </div>
+  </div>
+  <ul class="inputNameList">
+    <input type="text" id="inputNameArea">
+  </ul>
+</div>
+<script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+<script src="./filteredList.js"></script>
+</body>
