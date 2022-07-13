@@ -2,6 +2,7 @@ https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Strict_mode
 'use strict'
 
 const inputButton = document.querySelector('.inputButton')
+const inputButtonText = document.querySelector('.inputButtonText')
 const inputNameList = document.querySelector('.inputNameList')
 const inputNameArea = document.querySelector('#inputNameArea')
 const cross = document.querySelector('#cross')
@@ -17,40 +18,52 @@ const nameList = [
 let tmpNameList = [];
 
 const init = () => {
-  nameList.forEach(e => {
+  createNameList(nameList);
+  createEvent();
+}
+
+const createEvent = () => {
+  const inputName = document.querySelectorAll('.inputName')
+  inputName.forEach(e => 
+    e.addEventListener('click', function() {
+      inputButtonText.innerHTML = this.innerHTML
+    })
+  )
+  toggleExtended();
+}
+
+const createNameList = list => {
+  clearList();
+  list.forEach(e => {
     let list = document.createElement("li");
-    let li = inputNameList.appendChild(list);
+    let span = document.createElement("span");
+    let wrapper = document.createElement("div");
+    let icon = inputNameList.appendChild(span);
+    let wra = inputNameList.appendChild(wrapper);
+    wra.appendChild(icon);
+    let li = wra.appendChild(list);
+    wrapper.classList.add("nameListWrapper");
     li.classList.add("inputName");
+    icon.classList.add("material-symbols-outlined")
+    icon.innerHTML = "account_circle"
     li.innerHTML = e;
   })
 }
 
-inputButton.addEventListener('click', function() {
-  inputNameList.classList.toggle("extended");
-})
+const toggleExtended = () => {
+  inputButton.addEventListener('click', function() {
+    inputNameList.classList.toggle("extended");
+  })
+}
 
 inputNameArea.addEventListener('input', function() {
   let input = this.value
-  inputNameList.innerHTML = filteredNameList(input)
+  createNameList(filteredNameList(input))
+  createEvent();
 })
 
-const closeList = () => {
-  inputNameList.classList.remove("extended");
-}
-
-init();
-const inputName = document.querySelectorAll('.inputName')
-
-inputName.forEach(e => 
-  e.addEventListener('click', function() {
-    inputButton.innerHTML = this.innerHTML
-    closeList();
-  })
-)
-
-
 const filteredNameList = input => {
-  return filterNames(nameList, input)
+  return nameList.indexOf(input) === -1 ? filterNames(nameList, input) : nameList
 }
 
 const filterNames = (nameList, input) => {
@@ -58,10 +71,11 @@ const filterNames = (nameList, input) => {
   return tmpNameList
 }
 
-cross.addEventListener('click', function() {
-  clearList();
-})
+// cross.addEventListener('click', function() {
+//   clearList();
+// })
 
 const clearList = () => {
-  inputButton.innerHTML = ""
+  inputNameList.innerHTML = ""
 }
+init();

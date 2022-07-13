@@ -1,28 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
+    /* Google font Icon */
+    @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
     ul {
       margin: 0;
       padding: 0;
     }
     .inputButton {
-      width: 160px;
+      box-sizing: content-box;
+      width: 200px;
       height: 50px;
       border: 1px gray solid;
-      box-shadow: 2px 2px 2px 2px #ddd;
+      /* box-shadow: 2px 2px 2px 2px #ddd; */
       background-color: #fff;
       border-radius: 5px;
       cursor: pointer;
       text-align: center;
-      display: inline-block;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     .inputButton:hover {
       background-color: #ddd;
+    }
+    .inputButtonText {
+      text-align: center;
     }
     .inputNameList {
       list-style-type: none;
@@ -33,35 +42,54 @@
       flex-direction: column;
     }
     #inputNameArea {
-      width: 150px;
+      box-sizing: border-box;
+      width: 200px;
     }
     .inputName {
       cursor: pointer;
       margin: 3px;
+      padding: 5px;
       border-radius: 5px;
-      width: 150px;
-      background-color: #ffeeff;
+      width: 200px;
+      background-color: #fff;
     }
   .inputWrapper {
+    width: 200px;
     display: flex;
+    flex-direction: column;
+  }
+  .nameListWrapper {
+    display: flex;
+    flex-direction: row;
+  }
+  .nameListWrapper:hover {
+    background-color: #eee;
   }
   #cross {
     margin: 10px;
     cursor: pointer;
   }
+  .material-symbols-outlined {
+    padding: 8px;
+  }
+
   </style>
 </head>
 <body>
 
 <div id="wrapper">
   <div class="inputWrapper">
-    <div class="inputButton"></div>
+    <div class="inputButton">
+      <div class="inputButtonText"></div>
+    </div>
     <div class="clearInput">
-      <img src="img/cross.png" alt="cross" id="cross">
+      <!-- <img src="img/cross.png" alt="cross" id="cross"> -->
     </div>
   </div>
-  <ul class="inputNameList">
+  <div class="inputWrapper">
     <input type="text" id="inputNameArea">
+    <ul class="inputNameList">
+  </div>
   </ul>
 </div>
 <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
